@@ -19,18 +19,22 @@ import org.springframework.web.servlet.ModelAndView;
 import com.research.spring.model.UserInfo;
 import com.research.spring.view.ExcelView;
 
-
 @Controller
 @RequestMapping("/file")
 public class FileController {
 
+	/**
+	 * Excel文件上传处理
+	 * @param file
+	 * @return
+	 */
 	@RequestMapping("/upload")
-	public String uploadFile(@RequestParam("file") MultipartFile file){
-		if( file.getOriginalFilename().contains("财务") ){
+	public ModelAndView uploadExcel(@RequestParam("file") MultipartFile file){
+		List<UserInfo> list = new ArrayList<UserInfo>();
+		if( file.getOriginalFilename().contains("用户") ){
 			try {
 				Workbook wb = new HSSFWorkbook(file.getInputStream());
 				Sheet sheet = wb.getSheetAt(0);
-				List<UserInfo> list = new ArrayList<UserInfo>();
 				for( int i = 1; i <= sheet.getLastRowNum(); i++ ){
 					Row row = sheet.getRow(i);
 					UserInfo info = new UserInfo();
@@ -38,17 +42,20 @@ public class FileController {
 					info.setPassword(row.getCell(1).getStringCellValue());
 					list.add(info);
 				}
-				System.out.println(list);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			
 		}
-		return null;
+		ModelAndView mav = new ModelAndView("content");
+		mav.addObject("content",list.toString());
+		return mav;
 	}
 	
+	/**
+	 * Excel文件下载处理
+	 */
 	@RequestMapping("/download")
-	public ModelAndView downloanFile(){
+	public ModelAndView downloanExcel(){
 		List<UserInfo> list = new ArrayList<UserInfo>();
 		UserInfo userInfo = new UserInfo();
 		userInfo.setPassword("0000");
@@ -62,4 +69,5 @@ public class FileController {
 		ExcelView ve = new ExcelView();
 		return new ModelAndView(ve,map);
 	}
+	
 }
