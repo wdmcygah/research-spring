@@ -52,8 +52,10 @@ public class ExcelView extends AbstractExcelView {
 			}
 		}
 
-		String fileName = encodeFilename("用户.xls", request);
 		response.setContentType("application/vnd.ms-excel");
+		//这里对文件名进行编码，保证下载时汉字显示正常
+		String fileName = encodeFilename("用户.xls", request);
+		//Content-disposition属性设置成以附件方式进行下载
 		response.setHeader("Content-disposition", "attachment;filename="
 				+ fileName);
 		OutputStream os = response.getOutputStream();
