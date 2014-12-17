@@ -1,0 +1,1 @@
+恭喜你，${name}!你已经用spring+freemarker发送了一封模板邮件！

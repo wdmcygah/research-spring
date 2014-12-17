@@ -12,7 +12,9 @@
   http://www.springframework.org/schema/util
   http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<context:component-scan base-package="com.research" />
+	<context:component-scan base-package="com.research">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
 
 	<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="viewClass"	value="org.springframework.web.servlet.view.JstlView" />
@@ -25,4 +27,5 @@
 		<property name="maxUploadSize" value="5242880000000"></property>
 		<property name="uploadTempDir" value="upload/temp"></property>
 	</bean>
+	
 </beans>
