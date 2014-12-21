@@ -23,7 +23,10 @@ public class JavaMailService {
 	@Autowired
 	private JavaMailSender mailSender;
 	
-	public void sendMail(){
+	/**
+	 * 发送简单文本
+	 */
+	public void sendSimpleMail(){
 		MimeMessage javaMailMessage = mailSender.createMimeMessage();
 		MimeMailMessage msgWrapper = new MimeMailMessage(javaMailMessage);
 		msgWrapper.setTo("toEmailAddress");
@@ -35,6 +38,9 @@ public class JavaMailService {
 		System.out.println("发送成功........");
 	}
 	
+	/**
+	 * 发送更多内容邮件
+	 */
 	public void sendMultiMail(){
 		mailSender.send(new MimeMessagePreparator() {
 			public void prepare(MimeMessage mimeMessage) throws Exception {

@@ -15,7 +15,9 @@
 	</context:component-scan>
 	
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 这里选用163邮件服务器地址 -->
 		<property name="host" value="smtp.163.com"></property>
+		<!-- 用户名、密码改成自己真实的 -->
 		<property name="username" value="real_username"></property>
 		<property name="password" value="real_password"></property>
 		<property name="defaultEncoding" value="UTF-8"></property>

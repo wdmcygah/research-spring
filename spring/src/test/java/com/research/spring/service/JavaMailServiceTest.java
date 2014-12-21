@@ -10,7 +10,7 @@ public class JavaMailServiceTest extends BaseTest{
 	
 	@Test
 	public void send(){
-		mailService.sendMail();
+		mailService.sendSimpleMail();
 	}
 	
 	@Test
