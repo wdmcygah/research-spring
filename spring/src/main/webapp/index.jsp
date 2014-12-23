@@ -13,5 +13,10 @@
 	<input type="file" name="file"></input>
 	<input type="submit" value="上传Excel"></input>	
 </form>
+
+<h3>测试Excel的打包下载功能</h3>
+<form action="zip/download.htm" enctype="multipart/form-data" method="post">
+	<input type="submit" value="下载Excel打包文件"></input>	
+</form>
 </body>
 </html>
