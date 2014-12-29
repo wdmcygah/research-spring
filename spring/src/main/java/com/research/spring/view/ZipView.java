@@ -16,12 +16,10 @@ import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.util.IOUtils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.view.AbstractView;
 
 import com.research.spring.model.UserInfo;
 import com.research.spring.utils.ZipUtils;
-import com.sun.xml.internal.messaging.saaj.packaging.mime.internet.MimeUtility;
 
 /**
  * 下载Excel视图
@@ -40,7 +38,7 @@ public class ZipView extends AbstractView {
 		File file = getFile();
 		ZipUtils.zip(getFile(), b1,b2);
 		response.setContentType("application/octet-stream");
-		String name = encodeFilename("压缩.zip",request);
+		String name = URLEncoder.encode("压缩.zip", "UTF-8");
 		response.setHeader("Content-disposition", "attachment;filename="
 				+ name);
 		OutputStream os = response.getOutputStream();
@@ -95,39 +93,4 @@ public class ZipView extends AbstractView {
 		return f;
 	}
 	
-	/**
-	 * 这里对文件名进行编码，保证下载时汉字显示正确
-	 * @param filename
-	 * @param request
-	 * @return
-	 */
-	public static String encodeFilename(String filename,
-			HttpServletRequest request) {
-		/**
-		 * 获取客户端浏览器和操作系统信息 在IE浏览器中得到的是：User-Agent=Mozilla/4.0 (compatible; MSIE
-		 * 6.0; Windows NT 5.1; SV1; Maxthon; Alexa Toolbar)
-		 * 在Firefox中得到的是：User-Agent=Mozilla/5.0 (Windows; U; Windows NT 5.1;
-		 * zh-CN; rv:1.7.10) Gecko/20050717 Firefox/1.0.6
-		 */
-		String agent = request.getHeader("USER-AGENT");
-		try {
-			if ((agent != null) && (-1 != agent.indexOf("MSIE"))) {
-				String newFileName = URLEncoder.encode(filename, "UTF-8");
-				newFileName = StringUtils.replace(newFileName, "+", "%20");
-				if (newFileName.length() > 150) {
-					newFileName = new String(filename.getBytes("GB2312"),
-							"ISO8859-1");
-					newFileName = StringUtils.replace(newFileName, " ", "%20");
-				}
-				return newFileName;
-			}
-			if ((agent != null) && (-1 != agent.indexOf("Mozilla")))
-				return MimeUtility.encodeText(filename, "UTF-8", "B");
-
-			return filename;
-		} catch (Exception ex) {
-			return filename;
-		}
-	}
-
 }
