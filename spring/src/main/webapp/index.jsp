@@ -1,6 +1,9 @@
 <html>
 <head>        
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<jsp:include page="/WEB-INF/common/header.jsp">
+	<jsp:param name="pageTitle" value="Login"/>
+</jsp:include>
 </head>
 <body>
 <h3>测试下载Excel功能</h3>
