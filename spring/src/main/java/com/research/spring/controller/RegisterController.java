@@ -59,7 +59,7 @@ public class RegisterController {
 		if( StringUtils.isEmpty(name) ){
 			return "false";
 		}
-		//只有以'y'开头的名字才是存在的
+		//只有以'y'开头的名字才是不存在的
 		if( name.startsWith("y") ){
 			return "true";
 		}
