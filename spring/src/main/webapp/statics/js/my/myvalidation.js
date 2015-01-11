@@ -51,5 +51,4 @@ $(function() {
 				    error.appendTo(element.parent().parent());  
 				}
 			});
-
 });
