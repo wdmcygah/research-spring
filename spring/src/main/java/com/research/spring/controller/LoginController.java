@@ -37,6 +37,7 @@ public class LoginController {
 	
 	@RequestMapping("/loginIn")
 	public String loginIn( UserInfo info, boolean remember, HttpServletRequest request, HttpServletResponse response,Model model){
+		//只有admin能登录成功
 		if( "admin".equals(info.getUserName()) && "admin".equals(info.getPassword()) ){
 			if( remember ){
 				rememberUser(request, response, info);
@@ -82,7 +83,7 @@ public class LoginController {
 	private void rememberUser(HttpServletRequest request, HttpServletResponse response, UserInfo info) {
 		//这里只是模拟，实际情况可能需要对值进行算法加密
 		String cName = info.getUserName();
-		String cValue = info.getUserName() + request.getServerName() + new Date().getTime();
+		String cValue = info.getUserName() + new Date().getTime();
 		Cookie cookie = new Cookie(cName,cValue);
 		//有效期30分钟
 		cookie.setMaxAge(30*60);
