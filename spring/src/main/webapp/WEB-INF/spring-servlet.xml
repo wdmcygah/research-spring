@@ -25,11 +25,19 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 
+<!-- 附件解析器 -->
 	<bean id="multipartResolver"
 		class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8"></property>
 		<property name="maxUploadSize" value="5242880000000"></property>
 		<property name="uploadTempDir" value="upload/temp"></property>
 	</bean>
+
+<!-- locale解析器 使用cookie -->
+<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+    <property name="cookieName" value="clientlanguage"/>
+    <property name="cookieMaxAge" value="100000"/>
+    <property name="cookiePath" value="/"/>
+</bean>
 
 </beans>

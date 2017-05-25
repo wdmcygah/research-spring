@@ -10,10 +10,6 @@
   http://www.springframework.org/schema/util
   http://www.springframework.org/schema/util/spring-util-3.0.xsd">
 
-	<context:component-scan base-package="com.research" >
-		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
-	</context:component-scan>
-	
 	<bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
 		<!-- 这里选用163邮件服务器地址 -->
 		<property name="host" value="smtp.163.com"></property>
